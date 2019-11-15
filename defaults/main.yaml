@@ -1,4 +1,4 @@
 ---
 # defaults file for jee-worker-role
-deployer_version: 3.0.0-SNAPSHOT
+deployer_version: 2.10.1
 deployer_default_group_id: com.github.t1

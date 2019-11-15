@@ -1,29 +1,31 @@
 ---
 - name: Copy deployer.config.yaml
   become: True
+  become_user: wildfly
   template:
     src: deployer.config.yaml
     dest: /opt/wildfly/standalone/configuration/
-    owner: wildfly
-    group: wildfly
   notify:
   - restart deployer
 
 - name: Copy deployer.root.bundle
   become: True
+  become_user: wildfly
   template:
     src: deployer.root.bundle
     dest: /opt/wildfly/standalone/configuration/
-    owner: wildfly
-    group: wildfly
 
-- name: Copy deployer.war
-  become: True
-  copy:
-    src: '~/.m2/repository/com/github/t1/deployer/{{ deployer_version }}/deployer-{{ deployer_version }}.war'
+- name: Download & install deployer.war
+  maven_artifact:
+    group_id: com.github.t1
+    artifact_id: deployer
+    version: '{{ deployer_version }}'
+    extension: war
+    verify_checksum: always
+    repository_url: https://dl.bintray.com/t1/javaee-helpers/
     dest: '{{ deployments_dir }}/deployer.war'
-    owner: wildfly
-    group: wildfly
+  become: True
+  become_user: wildfly
 
 - name: wait for deployer to be alive
   wait_for:
