@@ -1,12 +1,7 @@
-jee-worker-role
+JEE-worker-role [![Build Status](https://travis-ci.org/t1/jee-worker-ansible-role.svg?branch=master)](https://travis-ci.org/t1/jee-worker-ansible-role)
 ===============
 
 A [Jakarta-EE](https://jakarta.ee) container (namely [Wildfly](https://wildfly.org)) running the [Deployer](https://github.com/t1/deployer), ready to act as a worker in a [kub-ee](https://github.com/t1/kub-ee) cluster (although it doesn't know about kub-ee).
-
-Requirements
-------------
-
-I had difficulties with the ANSIBLE_ROLES_PATH. It didn't include `~/.ansible/roles`. Molecule seems to override the default value `~/.ansible/roles:/usr/share/ansible/roles:/etc/ansible/roles`. Setting it in the `molecule.yml/provisioner` didn't help. So I did `ln -s ~/.ansible/roles/ molecule/roles`, but I had to git-ignore it, as the link is relative to _my_ home.
 
 Role Variables
 --------------
