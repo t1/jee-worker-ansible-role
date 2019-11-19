@@ -14,24 +14,24 @@ log-handlers:
 loggers:
   com.github.t1.deployer:
     handlers: [DEPLOYER,CONSOLE]
-  {% if deployables is defined %}
+{% if deployables is defined %}
 deployables:
-  {%   for key in deployables.keys() %}
+{%   for key in deployables.keys() %}
   {{ key }}:
-  {%     if key in deployables.keys() and deployables[key] is mapping %}
-  {%       set value = deployables[key] %}
-  {%       if 'group-id' in value.keys() %}
-group-id: {{ value['group-id'] }}
-  {%       endif %}
-  {%       if 'artifact-id' in value.keys() %}
-artifact-id: {{ value['artifact-id'] }}
-  {%       endif %}
-  {%       if 'version' in value.keys() %}
-version: {{ value['version'] }}
-  {%       endif %}
-  {%       if 'state' in value.keys() %}
-state: {{ value['state'] }}
-  {%       endif %}
-  {%     endif %}
-  {%   endfor %}
-  {% endif %}
+{%     if key in deployables.keys() and deployables[key] is mapping %}
+{%       set value = deployables[key] %}
+{%       if 'group-id' in value.keys() %}
+    group-id: {{ value['group-id'] }}
+{%       endif %}
+{%       if 'artifact-id' in value.keys() %}
+    artifact-id: {{ value['artifact-id'] }}
+{%       endif %}
+{%       if 'version' in value.keys() %}
+    version: {{ value['version'] }}
+{%       endif %}
+{%       if 'state' in value.keys() %}
+    state: {{ value['state'] }}
+{%       endif %}
+{%     endif %}
+{%   endfor %}
+{% endif %}
