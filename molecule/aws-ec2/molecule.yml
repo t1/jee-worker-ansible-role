@@ -9,10 +9,12 @@ lint:
   name: yamllint
 
 platforms:
-  - name: jee-molecule-aws-ec2
-    image: ami-080d06f90eb293a27 # Canonical Ubuntu 18.04 LTS bionic EBS
-    instance_type: t2.micro
-    vpc_subnet_id: subnet-eab308a7 # eu-central-1c. see `aws ec2 describe-subnets`
+- name: jee-worker-molecule-ubuntu-bionic
+  image: ami-080d06f90eb293a27 # Canonical Ubuntu 18.04 LTS bionic EBS
+  #image: ami-0f71209b1289bf95c # AWS' official Ubuntu image -> not supported by ec2 task?!?
+  #image: ami-04d89476e6d7c068b # Amazon Linux 2 LTS Arm64 2.0.20191024.3 -> not supported by ec2 task?!?
+  instance_type: t2.micro
+  vpc_subnet_id: subnet-eab308a7 # eu-central-1c. see `aws ec2 describe-subnets`
 
 provisioner:
   name: ansible
