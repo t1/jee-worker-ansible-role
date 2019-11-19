@@ -34,6 +34,13 @@
   become_user: wildfly
 
 - name: wait for deployer to be alive
-  health_check:
-    url: http://localhost:8080/deployer/check/liveness
+  # TODO this isn't really idempotent, i.e. a second run on the same day
+  # would see the log of the first. The `health_check` module might help,
+  # but it's not in the ansible core, and it needs python libs that have
+  # to be installed first (at least on ubuntu).
+  # health_check:
+  #  url: http://localhost:8080/deployer/check/liveness
+  wait_for:
+    path: '{{ application_server_home }}/standalone/log/server.log'
+    search_regex: "Registered web context: '/deployer'"
     timeout: 30
